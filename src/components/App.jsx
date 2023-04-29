@@ -23,6 +23,7 @@ export const App = () => {
   //     setContacts(parsedContacts);
   //   }
   // }, []);
+  
 
   // const isFirstRender = useRef(true);
 
