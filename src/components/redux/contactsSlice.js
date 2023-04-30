@@ -49,7 +49,7 @@ export const persistedContactsReducer = persistReducer(
   contactsReducer
 );
 
-////Без Slice когда под капотом нет Redux Toolkit
+////Без Slice когда нет Redux Toolkit
 // export const addContact = createAction('contacts/addContact');
 // export const deleteContact = createAction('contacts/deleteContact');
 // export const setStatusFilter = createAction('contacts/setStatusFilter');
