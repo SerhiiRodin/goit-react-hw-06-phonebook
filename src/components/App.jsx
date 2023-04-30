@@ -15,28 +15,6 @@ export const App = () => {
   const { contacts, filter } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const contacts = localStorage.getItem('contacts');
-  //   const parsedContacts = JSON.parse(contacts);
-
-  //   if (parsedContacts) {
-  //     setContacts(parsedContacts);
-  //   }
-  // }, []);
-  
-
-  // const isFirstRender = useRef(true);
-
-  // useEffect(() => {
-  //   // Для пропуска рендера на стадии монтрования(первого рендера)
-  //   if (isFirstRender.current) {
-  //     isFirstRender.current = false;
-  //     return;
-  //   }
-
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-
   const handleAddContact = contact => {
     if (contacts.find(cont => cont.name === contact.name)) {
       return alert(`${contact.name} is already in contacts.`);

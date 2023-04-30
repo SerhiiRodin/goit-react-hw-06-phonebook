@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import persistReducer from 'redux-persist/es/persistReducer';
+
+import storage from 'redux-persist/lib/storage';
 
 const initialState = {
   contacts: [
@@ -31,8 +34,22 @@ const contactsSlice = createSlice({
 export const { addContact, deleteContact, setStatusFilter } =
   contactsSlice.actions;
 
-export const contactsReducer = contactsSlice.reducer;
+const contactsReducer = contactsSlice.reducer;
 
+// Для сохранения в локалСтор.
+const persistConfig = {
+  key: 'items',
+  storage,
+  // Сохраняем в стор только contacts, filter нет
+  whitelist: ['contacts'],
+};
+
+export const persistedContactsReducer = persistReducer(
+  persistConfig,
+  contactsReducer
+);
+
+////Без Slice когда под капотом нет Redux Toolkit
 // export const addContact = createAction('contacts/addContact');
 // export const deleteContact = createAction('contacts/deleteContact');
 // export const setStatusFilter = createAction('contacts/setStatusFilter');
