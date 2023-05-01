@@ -1,12 +1,32 @@
-import PropTypes from 'prop-types';
 import { VscCircleSmallFilled } from 'react-icons/vsc';
 import css from './ContactList.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from 'components/redux/contactsSlice';
 
-export function ContactList({ contacts, deleteContact }) {
-  // console.log(contacts);
+export function ContactList() {
+  const { contacts, filter } = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
+  const filterByName = () => {
+    const arr = contacts.filter(el =>
+      el.name.toLowerCase().includes(filter.trim().toLowerCase())
+    );
+    return arr;
+  };
+
+  let currentContacts = [];
+
+  if (filter === '') {
+    currentContacts = contacts;
+  } else currentContacts = filterByName();
+
+  const handleDeleteContact = contactId => {
+    dispatch(deleteContact(contactId));
+  };
+
   return (
     <ul className={css['list-wraper']}>
-      {contacts.map(({ id, name, number }) => {
+      {currentContacts.map(({ id, name, number }) => {
         return (
           <li key={id} className={css['list-item']}>
             <VscCircleSmallFilled />
@@ -16,7 +36,7 @@ export function ContactList({ contacts, deleteContact }) {
             <button
               type="button"
               className={css['list-button']}
-              onClick={() => deleteContact(id)}
+              onClick={() => handleDeleteContact(id)}
             >
               Delete
             </button>
@@ -26,13 +46,3 @@ export function ContactList({ contacts, deleteContact }) {
     </ul>
   );
 }
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-};

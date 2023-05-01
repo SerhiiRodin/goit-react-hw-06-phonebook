@@ -1,7 +1,15 @@
-import PropTypes from 'prop-types';
 import css from './Filter.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setStatusFilter } from 'components/redux/contactsSlice';
 
-export function Filter({ filter, updateFilter }) {
+export function Filter() {
+  const { filter } = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
+  const updateFilter = date => {
+    dispatch(setStatusFilter(date));
+  };
+
   return (
     <label className={css['form-label']}>
       Find contacts by name
@@ -17,8 +25,3 @@ export function Filter({ filter, updateFilter }) {
     </label>
   );
 }
-
-Filter.propTypes = {
-  filter: PropTypes.string,
-  updateFilter: PropTypes.func.isRequired,
-};
