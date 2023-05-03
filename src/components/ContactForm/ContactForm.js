@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 
 import css from './ContactForm.module.css';
 
-import { addContact } from 'components/redux/contactsSlice';
+import { addContact } from 'redux/contactsSlice';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');

@@ -1,7 +1,7 @@
 import { VscCircleSmallFilled } from 'react-icons/vsc';
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'components/redux/contactsSlice';
+import { deleteContact } from 'redux/contactsSlice';
 
 export function ContactList() {
   const { contacts, filter } = useSelector(state => state.contacts);
